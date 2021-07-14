@@ -1,6 +1,6 @@
 package com.ttd.ttdbyexample;
 
-public class Money {
+public class Money implements Expression {
 
     protected int amount;
     protected String currency;
@@ -38,7 +38,17 @@ public class Money {
     }
 
     public Money times(int multiplier) {
-//        return Money.dollar(amount * multiplier);
         return new Money(amount * multiplier, this.currency);
+    }
+
+    public Money reduce(Bank bank, String to) {
+//        return this;
+//        int rate = (currency.equals("CHF") && to.equals("USD")) ? 2 : 1;
+        return new Money(amount / bank.rate(this.currency, to), to);
+    }
+
+    public Expression plus(Money addend) {
+//        return new Money(amount + addend.amount, currency);
+        return new Sum(this, addend);
     }
 }
