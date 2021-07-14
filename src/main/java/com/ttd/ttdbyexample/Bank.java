@@ -1,25 +1,21 @@
 package com.ttd.ttdbyexample;
 
 
-import javax.swing.text.ParagraphView;
 import java.util.HashMap;
 
 public class Bank {
 
-    private HashMap<Pair, Integer> rateMap = new HashMap<>();
+    private final HashMap<Pair, Integer> rateMap = new HashMap<>();
 
-    Money reduce(Expression source, String toCurrency) {
-        return source.reduce(this, toCurrency);
-//        if(source instanceof  Money) return (Money) source;
-//        Sum sum = (Sum) source;
-//        return sum.reduce(toCurrency);
+    Money reduce(Expression source) {
+        return source.reduce(this, "USD");
     }
 
     public int rate(String from, String to) {
         if(from.equals(to))
             return 1;
-        Integer rate = rateMap.get(new Pair(from, to));
-        return  rate;
+        final Integer integer = rateMap.get(new Pair(from, to));
+        return integer;
 //        return (from.equals("CHF") && to.equals("USD")) ? 2 : 1;
     }
 
